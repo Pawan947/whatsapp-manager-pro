@@ -11,18 +11,6 @@ A professional landing page for WhatsApp Manager Pro, showcasing its features an
 - Easy QR code login
 - No data leaks
 
-## Setup
-
-1. Clone the repository
-2. Open `index.html` in your browser
-3. For deployment, enable GitHub Pages in repository settings
-
-## Technologies Used
-
-- HTML5
-- CSS3
-- JavaScript
-- GitHub Pages for hosting
 
 ## Contact
 
