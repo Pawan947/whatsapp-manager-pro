@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WhatsApp Manager Pro | Advanced Messaging Solution</title>
+    <style>
+        :root {
+            --primary-red: #ff3333;
+            --dark-red: #cc0000;
+            --black: #1a1a1a;
+            --light-gray: #f5f5f5;
+            --dark-gray: #333;
+            --accent-blue: #0066cc;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--black);
+            color: var(--light-gray);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        nav {
+            background-color: rgba(26, 26, 26, 0.95);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-red);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--light-gray);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-red);
+        }
+
+        header {
+            padding: 8rem 0 4rem;
+            text-align: center;
+            background: linear-gradient(45deg, var(--black), var(--dark-red));
+        }
+
+        .hero {
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, rgba(255, 51, 51, 0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            position: relative;
+            z-index: 1;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-red);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            color: var(--light-gray);
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            font-size: 1.2rem;
+            background-color: var(--primary-red);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            margin: 1rem;
+        }
+
+        .cta-button:hover {
+            background-color: var(--dark-red);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 51, 51, 0.4);
+        }
+
+        .features {
+            padding: 4rem 0;
+            background-color: rgba(255, 51, 51, 0.1);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary-red);
+            margin-bottom: 1rem;
+        }
+
+        .section-title p {
+            color: var(--light-gray);
+            font-size: 1.2rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .feature-card {
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-red);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary-red);
+            margin-bottom: 1rem;
+        }
+
+        .feature-list {
+            text-align: left;
+            margin-top: 1rem;
+        }
+
+        .feature-list li {
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .feature-list li::before {
+            content: "✓";
+            color: var(--primary-red);
+            font-weight: bold;
+        }
+
+        .stats-section {
+            padding: 4rem 0;
+            background-color: var(--dark-gray);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .stat-item {
+            padding: 2rem;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            color: var(--primary-red);
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--light-gray);
+            font-size: 1.1rem;
+        }
+
+        .how-it-works {
+            padding: 4rem 0;
+            background: linear-gradient(45deg, var(--black), var(--dark-gray));
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .step-card {
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+        }
+
+        .step-number {
+            font-size: 2rem;
+            color: var(--primary-red);
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .step-card h3 {
+            color: var(--primary-red);
+            margin-bottom: 1rem;
+        }
+
+        .how-to-use {
+            padding: 4rem 0;
+            background-color: var(--black);
+        }
+
+        .tabs-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .tabs {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .tab {
+            padding: 0.8rem 1.5rem;
+            background-color: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50px;
+            color: var(--light-gray);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .tab:hover {
+            background-color: rgba(255, 51, 51, 0.1);
+            border-color: var(--primary-red);
+        }
+
+        .tab.active {
+            background-color: var(--primary-red);
+            color: white;
+            border-color: var(--primary-red);
+        }
+
+        .tab-content {
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            margin-top: 1rem;
+        }
+
+        .tab-panel {
+            display: none;
+        }
+
+        .tab-panel.active {
+            display: block;
+        }
+
+        .feature-guide {
+            margin-top: 2rem;
+        }
+
+        .guide-section {
+            margin-bottom: 2rem;
+        }
+
+        .guide-section h3 {
+            color: var(--primary-red);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .guide-list {
+            list-style: none;
+            margin-left: 1rem;
+        }
+
+        .guide-list li {
+            margin-bottom: 0.8rem;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .guide-list li::before {
+            content: "✓";
+            color: var(--primary-red);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        .guide-steps {
+            list-style: none;
+            margin-left: 1rem;
+        }
+
+        .guide-steps li {
+            margin-bottom: 1rem;
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .guide-steps li::before {
+            content: attr(data-step);
+            color: var(--primary-red);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        .guide-note {
+            background-color: rgba(255, 51, 51, 0.1);
+            border-left: 3px solid var(--primary-red);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0 5px 5px 0;
+        }
+
+        .download-section {
+            text-align: center;
+            padding: 4rem 0;
+            background-color: var(--dark-gray);
+        }
+
+        .download-options {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .download-card {
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 10px;
+            min-width: 300px;
+            transition: transform 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .download-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-red);
+        }
+
+        .version {
+            color: var(--primary-red);
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .contact-section {
+            padding: 4rem 0;
+            background-color: var(--black);
+        }
+
+        .activation-info {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 2rem;
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+        }
+
+        .activation-info p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--light-gray);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            padding: 1rem 2rem;
+            background-color: rgba(255, 51, 51, 0.1);
+            border-radius: 50px;
+            border: 1px solid var(--primary-red);
+        }
+
+        .social-link:hover {
+            color: var(--primary-red);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 51, 51, 0.2);
+        }
+
+        .social-icon {
+            font-size: 1.5rem;
+        }
+
+        .activation-steps {
+            margin-top: 2rem;
+            text-align: left;
+            padding: 0 1rem;
+        }
+
+        .activation-steps li {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .activation-steps li::before {
+            content: "✓";
+            color: var(--primary-red);
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .subtitle {
+                font-size: 1.2rem;
+            }
+
+            .hero {
+                min-height: 60vh;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+
+        .download-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            font-size: 1.2rem;
+            background-color: var(--primary-red);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            margin: 1rem 0;
+            width: 100%;
+            max-width: 300px;
+        }
+
+        .download-button:hover:not(.coming-soon) {
+            background-color: var(--dark-red);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 51, 51, 0.4);
+        }
+
+        .download-button.coming-soon {
+            background-color: #333;
+            border: 1px solid #444;
+            cursor: not-allowed;
+            opacity: 0.8;
+        }
+
+        .download-button.coming-soon:hover {
+            transform: none;
+            box-shadow: none;
+        }
+
+        .button-icon {
+            font-size: 1.4rem;
+        }
+
+        .version-info {
+            color: #888;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        .download-note {
+            margin-top: 2rem;
+            color: var(--light-gray);
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="container nav-content">
+            <div class="logo">WhatsApp Manager Pro</div>
+            <div class="nav-links">
+                <a href="#features">Features</a>
+                <a href="#how-it-works">How It Works</a>
+                <a href="#download">Download</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <header>
+        <div class="container">
+            <h1>WhatsApp Manager Pro</h1>
+            <p class="subtitle">Advanced Messaging & Automation Solution</p>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h2>Powerful WhatsApp Management</h2>
+                <p class="subtitle">Bulk messaging, AI integration, analytics, and more for efficient communication</p>
+                <a href="#download" class="cta-button">Get Started</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="features" class="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>Key Features</h2>
+                <p>Comprehensive tools for WhatsApp management</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📨</div>
+                    <h3>Bulk Messaging</h3>
+                    <p>Send messages to multiple recipients efficiently</p>
+                    <ul class="feature-list">
+                        <li>Excel file integration</li>
+                        <li>Message scheduling</li>
+                        <li>Attachment support</li>
+                        <li>Customizable delays</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🤖</div>
+                    <h3>AI Integration</h3>
+                    <p>AI for smart responses</p>
+                    <ul class="feature-list">
+                        <li>Automated response generation</li>
+                        <li>Context-aware messaging</li>
+                        <li>Custom AI persona creation</li>
+                        <li>Message validation</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💬</div>
+                    <h3>Chat Management</h3>
+                    <p>Comprehensive chat monitoring and control</p>
+                    <ul class="feature-list">
+                        <li>View chat history</li>
+                        <li>Real-time monitoring</li>
+                        <li>Auto-response capabilities</li>
+                        <li>Message search functionality</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Analytics & Reporting</h3>
+                    <p>Detailed insights into your messaging</p>
+                    <ul class="feature-list">
+                        <li>Message count tracking</li>
+                        <li>Delivery status monitoring</li>
+                        <li>Time-based analytics</li>
+                        <li>Export capabilities</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="stats-section">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number">🔒</div>
+                    <div class="stat-label">Local Storage Only</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">📱</div>
+                    <div class="stat-label">Easy QR Login</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">💯</div>
+                    <div class="stat-label">No Data Leaks</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">🛡️</div>
+                    <div class="stat-label">Device Security</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="how-it-works" class="how-it-works">
+        <div class="container">
+            <div class="section-title">
+                <h2>How It Works</h2>
+                <p>Simple and secure setup process</p>
+            </div>
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <h3>Quick QR Login</h3>
+                    <p>Simply scan the QR code with your WhatsApp - no complex setup needed</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <h3>Local Storage</h3>
+                    <p>All data stays on your device - we don't store anything on our servers</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <h3>Start Using</h3>
+                    <p>Begin managing your WhatsApp messages with complete privacy</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">4</div>
+                    <h3>Stay Secure</h3>
+                    <p>Your data remains safe and private on your device</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="how-to-use" class="how-to-use">
+        <div class="container">
+            <div class="section-title">
+                <h2>How to Use</h2>
+                <p>Simple and secure guide to using WhatsApp Manager Pro</p>
+            </div>
+            <div class="tabs-container">
+                <div class="tabs">
+                    <div class="tab active" data-tab="getting-started">Getting Started</div>
+                    <div class="tab" data-tab="security">Security</div>
+                    <div class="tab" data-tab="bulk-messaging">Bulk Messaging</div>
+                    <div class="tab" data-tab="chat-management">Chat Management</div>
+                    <div class="tab" data-tab="ai-integration">AI Integration</div>
+                </div>
+                <div class="tab-content">
+                    <div class="tab-panel active" id="getting-started">
+                        <div class="feature-guide">
+                            <div class="guide-section">
+                                <h3>Quick Start Guide</h3>
+                                <ol class="guide-steps">
+                                    <li data-step="1">Download and install the application</li>
+                                    <li data-step="2">Open the app and click "Start"</li>
+                                    <li data-step="3">Scan the QR code with your WhatsApp</li>
+                                    <li data-step="4">You're ready to use - all data stays on your device</li>
+                                </ol>
+                            </div>
+                            <div class="guide-section">
+                                <h3>Privacy First</h3>
+                                <ul class="guide-list">
+                                    <li>No account creation required</li>
+                                    <li>No personal data collection</li>
+                                    <li>Everything stored locally</li>
+                                    <li>Complete privacy guaranteed</li>
+                                </ul>
+                            </div>
+                            <div class="guide-note">
+                                <strong>Security Note:</strong> Your data never leaves your device. We use local storage only, ensuring complete privacy and security.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-panel" id="security">
+                        <div class="feature-guide">
+                            <div class="guide-section">
+                                <h3>Security Features</h3>
+                                <ul class="guide-list">
+                                    <li>Local device storage only</li>
+                                    <li>No server data storage</li>
+                                    <li>End-to-end encryption</li>
+                                    <li>Secure QR code login</li>
+                                    <li>No data leaks possible</li>
+                                </ul>
+                            </div>
+                            <div class="guide-section">
+                                <h3>How We Protect Your Data</h3>
+                                <ol class="guide-steps">
+                                    <li data-step="1">All data stored on your device only</li>
+                                    <li data-step="2">No cloud storage or servers used</li>
+                                    <li data-step="3">Direct WhatsApp connection</li>
+                                    <li data-step="4">Regular security updates</li>
+                                    <li data-step="5">Complete privacy control</li>
+                                </ol>
+                            </div>
+                            <div class="guide-note">
+                                <strong>Privacy Guarantee:</strong> We never collect, store, or transmit your data. Everything stays on your device for maximum security.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-panel" id="bulk-messaging">
+                        <div class="feature-guide">
+                            <div class="guide-section">
+                                <h3>Bulk Messaging Features</h3>
+                                <ul class="guide-list">
+                                    <li>Send messages to multiple recipients</li>
+                                    <li>Support for text messages and attachments</li>
+                                    <li>Message scheduling capabilities</li>
+                                    <li>Excel file integration for bulk contacts</li>
+                                </ul>
+                            </div>
+                            <div class="guide-section">
+                                <h3>How to Use Bulk Messaging</h3>
+                                <ol class="guide-steps">
+                                    <li data-step="1">Prepare your contact list in Excel format</li>
+                                    <li data-step="2">Upload the Excel file through the interface</li>
+                                    <li data-step="3">Compose your message</li>
+                                    <li data-step="4">Set sending parameters (delay, timing, etc.)</li>
+                                    <li data-step="5">Start the bulk sending process</li>
+                                </ol>
+                            </div>
+                            <div class="guide-note">
+                                <strong>Best Practice:</strong> Test messages before bulk sending and use appropriate delays between messages to avoid restrictions.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-panel" id="chat-management">
+                        <div class="feature-guide">
+                            <div class="guide-section">
+                                <h3>Chat Management Features</h3>
+                                <ul class="guide-list">
+                                    <li>View chat history</li>
+                                    <li>Real-time message monitoring</li>
+                                    <li>Auto-response capabilities</li>
+                                    <li>Chat analytics</li>
+                                    <li>Message search functionality</li>
+                                </ul>
+                            </div>
+                            <div class="guide-section">
+                                <h3>Using Chat Features</h3>
+                                <ol class="guide-steps">
+                                    <li data-step="1">Access the chat interface</li>
+                                    <li data-step="2">Select a contact or group</li>
+                                    <li data-step="3">View message history</li>
+                                    <li data-step="4">Send individual or group messages</li>
+                                    <li data-step="5">Monitor message status</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-panel" id="ai-integration">
+                        <div class="feature-guide">
+                            <div class="guide-section">
+                                <h3>AI Integration Features</h3>
+                                <ul class="guide-list">
+                                    <li>Google's Generative AI integration</li>
+                                    <li>Automated response generation</li>
+                                    <li>Context-aware messaging</li>
+                                    <li>Custom AI persona creation</li>
+                                    <li>Message validation and filtering</li>
+                                </ul>
+                            </div>
+                            <div class="guide-section">
+                                <h3>Using AI Features</h3>
+                                <ol class="guide-steps">
+                                    <li data-step="1">Configure AI settings</li>
+                                    <li data-step="2">Set up response templates</li>
+                                    <li data-step="3">Define trigger conditions</li>
+                                    <li data-step="4">Monitor AI-generated responses</li>
+                                    <li data-step="5">Adjust AI parameters as needed</li>
+                                </ol>
+                            </div>
+                            <div class="guide-note">
+                                <strong>Pro Tip:</strong> Regularly review and update AI response templates to ensure they remain relevant and effective.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="download" class="download-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Download Now</h2>
+                <p>Get started with WhatsApp Manager Pro for Windows</p>
+            </div>
+            <div class="download-grid" style="justify-content: center;">
+                <div class="download-card" style="max-width: 400px;">
+                    <div class="download-icon">🖥️</div>
+                    <h3>Windows Version</h3>
+                    <ul class="feature-list">
+                        <li>Windows 10 & 11 Compatible</li>
+                        <li>Easy Installation</li>
+                        <li>Automatic Updates</li>
+                        <li>Local Storage for Security</li>
+                        <li>Full Feature Support</li>
+                    </ul>
+                    <div style="text-align: center;">
+                        <a href="downloads/WhatsAppManagerPro-Setup.exe" class="download-button" id="windows-download">
+                            <span class="button-icon">⬇️</span>
+                            <span class="button-text">Download for Windows</span>
+                        </a>
+                        <p class="version-info">Version 1.0.0</p>
+                    </div>
+                </div>
+            </div>
+            <div class="download-note">
+                <p>🔒 Secure Download • No Data Collection • Local Storage Only</p>
+                <p style="margin-top: 10px; color: #888;">Currently available for Windows only</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Get Your Activation Code</h2>
+                <p>Contact us on Instagram for trial or purchase</p>
+            </div>
+            <div class="activation-info">
+                <p>To get your activation code for WhatsApp Manager Pro, please follow us on Instagram. We offer both trial and purchase options through our Instagram channel.</p>
+                <div class="social-links">
+                    <a href="https://www.instagram.com/pawan_.387?igsh=MWdtNjV6NXM1YjlrMQ==" target="_blank" class="social-link">
+                        <span class="social-icon">📸</span>
+                        <span>Get Activation Code on Instagram</span>
+                    </a>
+                </div>
+                <div class="activation-steps">
+                    <ul style="list-style: none;">
+                        <li>Follow our Instagram account</li>
+                        <li>Send us a direct message</li>
+                        <li>Choose between trial or purchase</li>
+                        <li>Receive your activation code instantly</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Add smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Check if download files exist and update buttons
+        function checkFileExists(url) {
+            return new Promise((resolve) => {
+                fetch(url, { method: 'HEAD' })
+                    .then(response => resolve(response.ok))
+                    .catch(() => resolve(false));
+            });
+        }
+
+        async function updateDownloadButtons() {
+            const windowsButton = document.getElementById('windows-download');
+
+            // Check Windows version
+            const windowsExists = await checkFileExists('downloads/WhatsAppManagerPro-Setup.exe');
+            if (!windowsExists) {
+                windowsButton.href = '#';
+                windowsButton.classList.add('coming-soon');
+                windowsButton.querySelector('.button-icon').textContent = '🔜';
+                windowsButton.querySelector('.button-text').textContent = 'Coming Soon';
+            }
+        }
+
+        // Call the function when page loads
+        updateDownloadButtons();
+
+        // Add animation on scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = 1;
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        });
+
+        document.querySelectorAll('.feature-card, .download-card, .step-card, .stat-item').forEach((el) => {
+            el.style.opacity = 0;
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'all 0.5s ease-out';
+            observer.observe(el);
+        });
+
+        // Prevent default action for "Coming Soon" buttons
+        document.querySelectorAll('.download-button.coming-soon').forEach(button => {
+            button.addEventListener('click', (e) => {
+                e.preventDefault();
+            });
+        });
+
+        // Tab functionality
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Remove active class from all tabs
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                // Add active class to clicked tab
+                tab.classList.add('active');
+                
+                // Hide all tab panels
+                document.querySelectorAll('.tab-panel').forEach(panel => panel.classList.remove('active'));
+                // Show the corresponding panel
+                const tabId = tab.getAttribute('data-tab');
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html> 
