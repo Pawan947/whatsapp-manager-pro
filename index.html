@@ -911,31 +911,6 @@
             });
         });
 
-        // Check if download files exist and update buttons
-        function checkFileExists(url) {
-            return new Promise((resolve) => {
-                fetch(url, { method: 'HEAD' })
-                    .then(response => resolve(response.ok))
-                    .catch(() => resolve(false));
-            });
-        }
-
-        async function updateDownloadButtons() {
-            const windowsButton = document.getElementById('windows-download');
-
-            // Check Windows version
-            const windowsExists = await checkFileExists('downloads/WhatsAppManagerPro.zip');
-            if (!windowsExists) {
-                windowsButton.href = '#';
-                windowsButton.classList.add('coming-soon');
-                windowsButton.querySelector('.button-icon').textContent = '🔜';
-                windowsButton.querySelector('.button-text').textContent = 'Coming Soon';
-            }
-        }
-
-        // Call the function when page loads
-        updateDownloadButtons();
-
         // Add animation on scroll
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -951,13 +926,6 @@
             el.style.transform = 'translateY(20px)';
             el.style.transition = 'all 0.5s ease-out';
             observer.observe(el);
-        });
-
-        // Prevent default action for "Coming Soon" buttons
-        document.querySelectorAll('.download-button.coming-soon').forEach(button => {
-            button.addEventListener('click', (e) => {
-                e.preventDefault();
-            });
         });
 
         // Tab functionality
