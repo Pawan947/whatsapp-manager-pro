@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WhatsApp Manager Pro | Advanced Messaging Solution</title>
     <style>
+        /* Advanced Design Elements */
         :root {
             --primary-red: #ff3333;
             --dark-red: #cc0000;
@@ -12,6 +13,10 @@
             --light-gray: #f5f5f5;
             --dark-gray: #333;
             --accent-blue: #0066cc;
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            --neon-glow: 0 0 10px rgba(255, 51, 51, 0.5), 0 0 20px rgba(255, 51, 51, 0.3), 0 0 30px rgba(255, 51, 51, 0.1);
         }
 
         * {
@@ -25,6 +30,13 @@
             background-color: var(--black);
             color: var(--light-gray);
             line-height: 1.6;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(255, 0, 0, 0.03) 0%, transparent 25%),
+                radial-gradient(circle at 80% 80%, rgba(255, 0, 0, 0.03) 0%, transparent 25%),
+                radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 0.8) 0%, var(--black) 100%);
+            background-attachment: fixed;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         .container {
@@ -34,13 +46,16 @@
         }
 
         nav {
-            background-color: rgba(26, 26, 26, 0.95);
+            background-color: rgba(26, 26, 26, 0.7);
             padding: 1rem 0;
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 1000;
             backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 51, 51, 0.1);
+            transition: all 0.4s ease;
         }
 
         .nav-content {
@@ -50,9 +65,12 @@
         }
 
         .logo {
+            position: relative;
             font-size: 1.5rem;
             font-weight: bold;
             color: var(--primary-red);
+            text-shadow: 0 0 10px rgba(255, 51, 51, 0.3);
+            letter-spacing: 1px;
         }
 
         .nav-links {
@@ -61,13 +79,40 @@
         }
 
         .nav-links a {
+            position: relative;
             color: var(--light-gray);
             text-decoration: none;
-            transition: color 0.3s ease;
+            padding: 0.5rem 1rem;
+            margin: 0 0.2rem;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
         }
 
         .nav-links a:hover {
+            background-color: rgba(255, 51, 51, 0.1);
             color: var(--primary-red);
+            transform: translateY(-3px);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 50%;
+            background-color: var(--primary-red);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+            opacity: 0;
+        }
+
+        .nav-links a:hover::after {
+            width: 70%;
+            opacity: 1;
         }
 
         header {
@@ -77,14 +122,10 @@
         }
 
         .hero {
-            min-height: 80vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 2rem 0;
+            min-height: 90vh;
             position: relative;
             overflow: hidden;
+            background: linear-gradient(135deg, rgba(26, 26, 26, 0.9), rgba(204, 0, 0, 0.2));
         }
 
         .hero::before {
@@ -94,8 +135,16 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: radial-gradient(circle at center, rgba(255, 51, 51, 0.1) 0%, transparent 70%);
+            background: 
+                radial-gradient(circle at center, rgba(255, 51, 51, 0.1) 0%, transparent 70%),
+                url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ff3333' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
             pointer-events: none;
+            animation: bg-animation 60s linear infinite;
+        }
+
+        @keyframes bg-animation {
+            0% { background-position: 0 0; }
+            100% { background-position: 100px 100px; }
         }
 
         .hero-content {
@@ -148,14 +197,30 @@
         }
 
         .section-title h2 {
-            font-size: 2.5rem;
-            color: var(--primary-red);
-            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 800;
+            color: var(--light-gray);
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 60%;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, var(--primary-red), transparent);
+            bottom: -10px;
+            left: 20%;
+            border-radius: 2px;
         }
 
         .section-title p {
-            color: var(--light-gray);
-            font-size: 1.2rem;
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+            color: rgba(255, 255, 255, 0.7);
         }
 
         .features-grid {
@@ -165,29 +230,86 @@
             margin-top: 2rem;
         }
 
-        .feature-card {
-            background-color: rgba(255, 255, 255, 0.05);
-            padding: 2rem;
-            border-radius: 10px;
+        .feature-card, .step-card, .download-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--glass-shadow);
+            border-radius: 15px;
             text-align: center;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.5s cubic-bezier(0.17, 0.67, 0.83, 0.67);
+            transform-style: preserve-3d;
+            perspective: 1000px;
+            cursor: grab;
+            padding: 2rem;
+            transform-origin: center;
+            position: relative;
+            overflow: hidden;
+            min-height: 380px;
         }
 
-        .feature-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--primary-red);
+        .feature-card::before, .step-card::before, .download-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 100%);
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .feature-card:hover::before, .step-card:hover::before, .download-card:hover::before {
+            opacity: 1;
+        }
+
+        .feature-card .card-content, .step-card .card-content, .download-card .card-content {
+            transform-style: preserve-3d;
+            transition: transform 0.5s ease;
+            backface-visibility: hidden;
+        }
+
+        .feature-card h3, .step-card h3, .download-card h3 {
+            color: var(--primary-red);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            transform: translateZ(20px);
+        }
+
+        .feature-card p, .step-card p, .download-card p {
+            color: var(--light-gray);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+            transform: translateZ(15px);
+        }
+
+        .feature-list, .guide-list {
+            text-align: left;
+            margin-top: 1rem;
+            transform: translateZ(10px);
         }
 
         .feature-icon {
+            position: relative;
+            display: inline-block;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+            animation: float 6s ease-in-out infinite, rotate3d 15s linear infinite;
+            text-shadow: var(--neon-glow);
             font-size: 2.5rem;
             color: var(--primary-red);
             margin-bottom: 1rem;
         }
 
-        .feature-list {
-            text-align: left;
-            margin-top: 1rem;
+        @keyframes rotate3d {
+            0% { transform: rotateY(0deg) rotateX(0deg); }
+            50% { transform: rotateY(180deg) rotateX(10deg); }
+            100% { transform: rotateY(360deg) rotateX(0deg); }
         }
 
         .feature-list li {
@@ -220,6 +342,12 @@
         }
 
         .stat-number {
+            position: relative;
+            display: inline-block;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+            animation: float 6s ease-in-out infinite, rotate3d 15s linear infinite;
+            text-shadow: var(--neon-glow);
             font-size: 3rem;
             color: var(--primary-red);
             font-weight: bold;
@@ -244,14 +372,22 @@
         }
 
         .step-card {
-            background-color: rgba(255, 255, 255, 0.05);
-            padding: 2rem;
-            border-radius: 10px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--glass-shadow);
+            border-radius: 15px;
             text-align: center;
         }
 
         .step-number {
+            position: relative;
+            display: inline-block;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+            animation: float 6s ease-in-out infinite, rotate3d 15s linear infinite;
+            text-shadow: var(--neon-glow);
             font-size: 2rem;
             color: var(--primary-red);
             font-weight: bold;
@@ -303,9 +439,12 @@
         }
 
         .tab-content {
-            background-color: rgba(255, 255, 255, 0.05);
-            border-radius: 10px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--glass-shadow);
+            border-radius: 15px;
             padding: 2rem;
             margin-top: 1rem;
         }
@@ -393,16 +532,19 @@
         }
 
         .download-card {
-            background-color: rgba(255, 255, 255, 0.05);
-            padding: 2rem;
-            border-radius: 10px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--glass-shadow);
+            border-radius: 15px;
             min-width: 300px;
-            transition: transform 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.5s cubic-bezier(0.17, 0.67, 0.83, 0.67);
         }
 
         .download-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-15px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(255, 51, 51, 0.2);
             border-color: var(--primary-red);
         }
 
@@ -418,12 +560,13 @@
         }
 
         .activation-info {
-            max-width: 600px;
-            margin: 0 auto;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--glass-shadow);
+            border-radius: 15px;
             padding: 2rem;
-            background-color: rgba(255, 255, 255, 0.05);
-            border-radius: 10px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
             text-align: center;
         }
 
@@ -441,22 +584,25 @@
         }
 
         .social-link {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: var(--light-gray);
-            text-decoration: none;
-            transition: all 0.3s ease;
-            padding: 1rem 2rem;
-            background-color: rgba(255, 51, 51, 0.1);
+            position: relative;
+            overflow: hidden;
             border-radius: 50px;
-            border: 1px solid var(--primary-red);
+            padding: 1rem 2.5rem;
+            background: linear-gradient(135deg, var(--primary-red), var(--dark-red));
+            color: white;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all 0.4s ease;
+            border: none;
+            box-shadow: 0 6px 20px rgba(204, 0, 0, 0.4);
+            z-index: 1;
         }
 
         .social-link:hover {
-            color: var(--primary-red);
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(255, 51, 51, 0.2);
+            transform: translateY(-5px) scale(1.03);
+            box-shadow: 0 10px 25px rgba(204, 0, 0, 0.6);
+            letter-spacing: 2px;
         }
 
         .social-icon {
@@ -551,35 +697,789 @@
             margin-top: 2rem;
             color: var(--light-gray);
         }
+
+        /* Additional sophisticated styles */
+        .reveal-animation {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+        
+        .reveal-animation.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .stagger-item {
+            transition-delay: calc(var(--item-index) * 0.1s);
+        }
+        
+        .parallax-bg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background: radial-gradient(circle, rgba(255, 51, 51, 0.03) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .floating-element {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0); }
+        }
+        
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: padding 0.3s ease;
+        }
+        
+        .nav-scrolled {
+            padding: 0.5rem 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-links a {
+            position: relative;
+            color: var(--light-gray);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--primary-red);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .hero {
+            position: relative;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(45deg, var(--primary-red), #ff8080, #ff3333, #cc0000);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: gradientAnimation 8s ease infinite;
+            background-size: 300% 300%;
+            text-shadow: none;
+        }
+        
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .feature-card, .step-card, .download-card {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-card:hover, .step-card:hover, .download-card:hover {
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: 0 15px 30px rgba(255, 51, 51, 0.15);
+            border-color: var(--primary-red);
+        }
+        
+        .dynamic-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.05;
+            pointer-events: none;
+        }
+        
+        .cta-button {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: all 0.5s;
+        }
+        
+        .cta-button:hover::before {
+            left: 100%;
+        }
+        
+        .tab.active::before {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 10px;
+            height: 10px;
+            background-color: var(--primary-red);
+            clip-path: polygon(50% 100%, 0 0, 100% 0);
+        }
+        
+        .tab {
+            position: relative;
+        }
+
+        /* Glassmorphism Cards */
+        .feature-card, .step-card, .download-card, .tab-content, .activation-info {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--glass-shadow);
+            border-radius: 15px;
+            transition: all 0.5s cubic-bezier(0.17, 0.67, 0.83, 0.67);
+        }
+
+        .feature-card:hover, .step-card:hover, .download-card:hover {
+            transform: translateY(-15px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(255, 51, 51, 0.2);
+            border-color: var(--primary-red);
+        }
+
+        /* 3D Transform Effects */
+        .feature-icon, .step-number, .download-icon, .stat-number {
+            position: relative;
+            display: inline-block;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+            animation: float 6s ease-in-out infinite, rotate3d 15s linear infinite;
+            text-shadow: var(--neon-glow);
+        }
+
+        @keyframes rotate3d {
+            0% { transform: rotateY(0deg) rotateX(0deg); }
+            50% { transform: rotateY(180deg) rotateX(10deg); }
+            100% { transform: rotateY(360deg) rotateX(0deg); }
+        }
+
+        /* Advanced Particle Effects */
+        .particle {
+            position: absolute;
+            background: radial-gradient(circle, var(--primary-red) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0.3;
+            z-index: -1;
+            animation: particle-float 20s infinite linear;
+        }
+
+        @keyframes particle-float {
+            0% { transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(-100px) rotate(90deg) scale(1.2); }
+            50% { transform: translateY(0) rotate(180deg); }
+            75% { transform: translateY(100px) rotate(270deg) scale(0.8); }
+            100% { transform: translateY(0) rotate(360deg); }
+        }
+
+        /* Enhanced Text Styling */
+        h1, h2, h3, .logo {
+            position: relative;
+            display: inline-block;
+            letter-spacing: 1px;
+        }
+
+        .gradient-text {
+            background: linear-gradient(45deg, var(--primary-red), #ff8080, #ff3333, #cc0000);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: gradientAnimation 8s ease infinite;
+            background-size: 300% 300%;
+            text-shadow: none;
+        }
+
+        .section-title h2 {
+            position: relative;
+            display: inline-block;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 60%;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, var(--primary-red), transparent);
+            bottom: -10px;
+            left: 20%;
+            border-radius: 2px;
+        }
+
+        /* Custom Buttons with Neo Effects */
+        .cta-button, .download-button, .social-link {
+            position: relative;
+            overflow: hidden;
+            border-radius: 50px;
+            padding: 1rem 2.5rem;
+            background: linear-gradient(135deg, var(--primary-red), var(--dark-red));
+            color: white;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all 0.4s ease;
+            border: none;
+            box-shadow: 0 6px 20px rgba(204, 0, 0, 0.4);
+            z-index: 1;
+        }
+
+        .cta-button::before, .download-button::before, .social-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: all 0.6s ease;
+            z-index: -1;
+        }
+
+        .cta-button:hover::before, .download-button:hover::before, .social-link:hover::before {
+            left: 100%;
+        }
+
+        .cta-button:hover, .download-button:hover:not(.coming-soon), .social-link:hover {
+            transform: translateY(-5px) scale(1.03);
+            box-shadow: 0 10px 25px rgba(204, 0, 0, 0.6);
+            letter-spacing: 2px;
+        }
+
+        .cta-button:active, .download-button:active, .social-link:active {
+            transform: translateY(2px);
+            box-shadow: 0 2px 10px rgba(204, 0, 0, 0.4);
+        }
+
+        /* Advanced Nav Effects */
+        .nav-scrolled {
+            background-color: rgba(26, 26, 26, 0.9);
+            padding: 0.5rem 0;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            border-bottom: 1px solid rgba(255, 51, 51, 0.3);
+        }
+
+        .logo {
+            position: relative;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-red);
+            text-shadow: 0 0 10px rgba(255, 51, 51, 0.3);
+            letter-spacing: 1px;
+        }
+
+        .nav-links a {
+            position: relative;
+            color: var(--light-gray);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            margin: 0 0.2rem;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+
+        .nav-links a:hover {
+            background-color: rgba(255, 51, 51, 0.1);
+            color: var(--primary-red);
+            transform: translateY(-3px);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 50%;
+            background-color: var(--primary-red);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+            opacity: 0;
+        }
+
+        .nav-links a:hover::after {
+            width: 70%;
+            opacity: 1;
+        }
+        
+        /* Hero Section Enhancement */
+        .hero {
+            min-height: 90vh;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, rgba(26, 26, 26, 0.9), rgba(204, 0, 0, 0.2));
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at center, rgba(255, 51, 51, 0.1) 0%, transparent 70%),
+                url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ff3333' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+            pointer-events: none;
+            animation: bg-animation 60s linear infinite;
+        }
+
+        @keyframes bg-animation {
+            0% { background-position: 0 0; }
+            100% { background-position: 100px 100px; }
+        }
+
+        /* Custom Scroll Bar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--black);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(var(--primary-red), var(--dark-red));
+            border-radius: 5px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary-red);
+        }
+
+        /* Noise Overlay */
+        .noise-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            opacity: 0.03;
+            pointer-events: none;
+            z-index: 9999;
+        }
+        
+        /* Custom Cursor */
+        .custom-cursor, .custom-cursor-dot {
+            position: fixed;
+            pointer-events: none;
+            z-index: 10000;
+            mix-blend-mode: difference;
+            transition: transform 0.1s, opacity 0.3s ease;
+        }
+        
+        .custom-cursor {
+            width: 30px;
+            height: 30px;
+            border: 2px solid rgba(255, 51, 51, 0.8);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.3s, height 0.3s, border 0.3s;
+        }
+        
+        .custom-cursor-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--primary-red);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        /* Clickable elements cursor state */
+        a:hover ~ .custom-cursor, button:hover ~ .custom-cursor, 
+        .feature-card:hover ~ .custom-cursor, .download-button:hover ~ .custom-cursor {
+            width: 50px;
+            height: 50px;
+            border: 2px solid rgba(255, 51, 51, 0.5);
+            background-color: rgba(255, 51, 51, 0.1);
+        }
+        
+        /* 3D Cube Animation */
+        .cube-container {
+            width: 200px;
+            height: 200px;
+            perspective: 1000px;
+            margin: 3rem auto;
+        }
+        
+        .cube {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transform: rotateX(-15deg) rotateY(15deg);
+            animation: rotateCube 20s infinite linear;
+        }
+        
+        .cube-face {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            border: 2px solid rgba(255, 51, 51, 0.3);
+            background: rgba(26, 26, 26, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 20px rgba(255, 51, 51, 0.2) inset;
+            backdrop-filter: blur(10px);
+        }
+        
+        .cube-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .cube-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .cube-text {
+            font-size: 1rem;
+            font-weight: bold;
+            color: var(--primary-red);
+        }
+        
+        .front { transform: translateZ(100px); }
+        .back { transform: rotateY(180deg) translateZ(100px); }
+        .right { transform: rotateY(90deg) translateZ(100px); }
+        .left { transform: rotateY(-90deg) translateZ(100px); }
+        .top { transform: rotateX(90deg) translateZ(100px); }
+        .bottom { transform: rotateX(-90deg) translateZ(100px); }
+        
+        @keyframes rotateCube {
+            0% { transform: rotateX(-15deg) rotateY(0deg); }
+            100% { transform: rotateX(-15deg) rotateY(360deg); }
+        }
+        
+        .cube-container:hover .cube {
+            animation-play-state: paused;
+        }
+        
+        /* Header Shapes */
+        .header-shape {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            z-index: -1;
+        }
+        
+        .shape-1 {
+            width: 300px;
+            height: 300px;
+            background: rgba(255, 51, 51, 0.15);
+            top: -100px;
+            left: -100px;
+            animation: float 15s ease-in-out infinite;
+        }
+        
+        .shape-2 {
+            width: 400px;
+            height: 400px;
+            background: rgba(255, 51, 51, 0.1);
+            bottom: -200px;
+            right: -150px;
+            animation: float 20s ease-in-out infinite reverse;
+        }
+        
+        /* Wave Animation */
+        .wave-container {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            overflow: hidden;
+            line-height: 0;
+            transform: rotate(180deg);
+            z-index: 1;
+        }
+        
+        .wave {
+            width: 100%;
+            height: 150px;
+            animation: wave-animation 10s ease-in-out infinite alternate;
+        }
+        
+        @keyframes wave-animation {
+            0% { transform: translateX(-25%) scaleY(1); }
+            50% { transform: translateX(0%) scaleY(0.8); }
+            100% { transform: translateX(25%) scaleY(1); }
+        }
+        
+        /* Enhanced Logo */
+        .logo {
+            font-weight: 800;
+            letter-spacing: 1px;
+            position: relative;
+        }
+        
+        .highlight-text {
+            color: #fff;
+            position: relative;
+            display: inline-block;
+            text-shadow: 0 0 10px var(--primary-red), 0 0 20px var(--primary-red);
+        }
+        
+        /* Mobile Menu */
+        .mobile-menu-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 21px;
+            cursor: pointer;
+            z-index: 1000;
+        }
+        
+        .bar {
+            height: 3px;
+            width: 100%;
+            background-color: var(--light-gray);
+            border-radius: 10px;
+            transition: all 0.3s ease-in-out;
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-menu-toggle {
+                display: flex;
+            }
+            
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 70%;
+                height: 100vh;
+                background: rgba(26, 26, 26, 0.95);
+                backdrop-filter: blur(10px);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 2rem;
+                transition: right 0.5s ease;
+                z-index: 999;
+                border-left: 1px solid rgba(255, 51, 51, 0.2);
+            }
+            
+            .nav-links.active {
+                right: 0;
+                display: flex;
+            }
+            
+            .mobile-menu-toggle.active .bar:nth-child(1) {
+                transform: translateY(9px) rotate(45deg);
+                background-color: var(--primary-red);
+            }
+            
+            .mobile-menu-toggle.active .bar:nth-child(2) {
+                opacity: 0;
+            }
+            
+            .mobile-menu-toggle.active .bar:nth-child(3) {
+                transform: translateY(-9px) rotate(-45deg);
+                background-color: var(--primary-red);
+            }
+        }
+
+        /* Professional UI Elements */
+        .professional-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            padding: 0.3rem 0.8rem;
+            border-radius: 30px;
+            font-size: 0.7rem;
+            color: var(--primary-red);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            z-index: 10;
+        }
+
+        /* Business theme refinements */
+        body {
+            background-color: var(--black);
+            color: var(--light-gray);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(255, 0, 0, 0.03) 0%, transparent 25%),
+                radial-gradient(circle at 80% 80%, rgba(255, 0, 0, 0.03) 0%, transparent 25%),
+                radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 0.8) 0%, var(--black) 100%);
+            background-attachment: fixed;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .section-title h2 {
+            position: relative;
+            display: inline-block;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 800;
+            color: var(--light-gray);
+        }
+
+        .section-title p {
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Enterprise-grade UI elements */
+        .enterprise-ready {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: 0.8rem 1.5rem;
+            background: linear-gradient(45deg, rgba(255, 51, 51, 0.05), rgba(0, 0, 0, 0.2));
+            border-radius: 8px;
+            border-left: 3px solid var(--primary-red);
+        }
+
+        .enterprise-ready span {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .enterprise-ready span::before {
+            content: '✓';
+            color: var(--primary-red);
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
-    <nav>
+    <!-- Animated Background Elements -->
+    <div class="dynamic-bg" id="dynamicBg"></div>
+    <div class="noise-overlay"></div>
+    
+    <!-- Custom Cursor -->
+    <div class="custom-cursor" id="customCursor"></div>
+    <div class="custom-cursor-dot" id="customCursorDot"></div>
+    
+    <nav id="navbar">
         <div class="container nav-content">
-            <div class="logo">WhatsApp Manager Pro</div>
+            <div class="logo"><span class="highlight-text">W</span>hatsApp <span class="highlight-text">M</span>anager <span class="highlight-text">P</span>ro</div>
             <div class="nav-links">
-                <a href="#features">Features</a>
-                <a href="#how-it-works">How It Works</a>
-                <a href="#download">Download</a>
-                <a href="#contact">Contact</a>
+                <a href="#features" class="nav-link">Features</a>
+                <a href="#how-it-works" class="nav-link">How It Works</a>
+                <a href="#download" class="nav-link">Download</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </div>
+            <div class="mobile-menu-toggle" id="menuToggle">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
             </div>
         </div>
     </nav>
 
     <header>
         <div class="container">
-            <h1>WhatsApp Manager Pro</h1>
-            <p class="subtitle">Advanced Messaging & Automation Solution</p>
+            <h1 class="gradient-text reveal-animation">WhatsApp Manager Pro</h1>
+            <p class="subtitle reveal-animation" style="transition-delay: 0.2s;">Advanced Messaging & Automation Solution</p>
+            <div class="header-shape shape-1"></div>
+            <div class="header-shape shape-2"></div>
         </div>
     </header>
 
     <section class="hero">
+        <div class="parallax-bg" id="parallaxBg"></div>
         <div class="container">
             <div class="hero-content">
-                <h2>Powerful WhatsApp Management</h2>
-                <p class="subtitle">Bulk messaging, AI integration, analytics, and more for efficient communication</p>
-                <a href="#download" class="cta-button">Get Started</a>
+                <h2 class="reveal-animation">Powerful WhatsApp Management</h2>
+                <p class="subtitle reveal-animation" style="transition-delay: 0.2s;">Bulk messaging, AI integration, analytics, and more for efficient communication</p>
+                <a href="#download" class="cta-button reveal-animation" style="transition-delay: 0.3s;">
+                    <span class="button-text">Get Started</span>
+                    <span class="button-icon">→</span>
+                </a>
+                
+                <!-- 3D Rotating Cube -->
+                <div class="cube-container reveal-animation" style="transition-delay: 0.5s;">
+                    <div class="cube" id="cube">
+                        <div class="cube-face front">
+                            <div class="cube-content">
+                                <div class="cube-icon">📱</div>
+                                <div class="cube-text">WhatsApp Manager</div>
+                            </div>
+                        </div>
+                        <div class="cube-face back">
+                            <div class="cube-content">
+                                <div class="cube-icon">💬</div>
+                                <div class="cube-text">Messaging</div>
+                            </div>
+                        </div>
+                        <div class="cube-face right">
+                            <div class="cube-content">
+                                <div class="cube-icon">🤖</div>
+                                <div class="cube-text">AI Integration</div>
+                            </div>
+                        </div>
+                        <div class="cube-face left">
+                            <div class="cube-content">
+                                <div class="cube-icon">📊</div>
+                                <div class="cube-text">Analytics</div>
+                            </div>
+                        </div>
+                        <div class="cube-face top">
+                            <div class="cube-content">
+                                <div class="cube-icon">🔒</div>
+                                <div class="cube-text">Security</div>
+                            </div>
+                        </div>
+                        <div class="cube-face bottom">
+                            <div class="cube-content">
+                                <div class="cube-icon">⚙️</div>
+                                <div class="cube-text">Settings</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
+        </div>
+        
+        <!-- Animated Wave -->
+        <div class="wave-container">
+            <svg class="wave" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+                <path fill="rgba(255, 51, 51, 0.05)" fill-opacity="1" d="M0,192L48,181.3C96,171,192,149,288,154.7C384,160,480,192,576,218.7C672,245,768,267,864,261.3C960,256,1056,224,1152,218.7C1248,213,1344,235,1392,245.3L1440,256L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+            </svg>
         </div>
     </section>
 
@@ -591,49 +1491,66 @@
             </div>
             <div class="features-grid">
                 <div class="feature-card">
-                    <div class="feature-icon">📨</div>
-                    <h3>Bulk Messaging</h3>
-                    <p>Send messages to multiple recipients efficiently</p>
-                    <ul class="feature-list">
-                        <li>Excel file integration</li>
-                        <li>Message scheduling</li>
-                        <li>Attachment support</li>
-                        <li>Customizable delays</li>
-                    </ul>
+                    <div class="professional-badge">Enterprise</div>
+                    <div class="card-content">
+                        <div class="feature-icon">📨</div>
+                        <h3>Bulk Messaging</h3>
+                        <p>Send messages to multiple recipients efficiently</p>
+                        <ul class="feature-list">
+                            <li>Excel file integration</li>
+                            <li>Message scheduling</li>
+                            <li>Attachment support</li>
+                            <li>Customizable delays</li>
+                        </ul>
+                    </div>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon">🤖</div>
-                    <h3>AI Integration</h3>
-                    <p>AI for smart responses</p>
-                    <ul class="feature-list">
-                        <li>Automated response generation</li>
-                        <li>Context-aware messaging</li>
-                        <li>Custom AI persona creation</li>
-                        <li>Message validation</li>
-                    </ul>
+                    <div class="professional-badge">Advanced</div>
+                    <div class="card-content">
+                        <div class="feature-icon">🤖</div>
+                        <h3>AI Integration</h3>
+                        <p>AI for smart responses</p>
+                        <ul class="feature-list">
+                            <li>Automated response generation</li>
+                            <li>Context-aware messaging</li>
+                            <li>Custom AI persona creation</li>
+                            <li>Message validation</li>
+                        </ul>
+                    </div>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon">💬</div>
-                    <h3>Chat Management</h3>
-                    <p>Comprehensive chat monitoring and control</p>
-                    <ul class="feature-list">
-                        <li>View chat history</li>
-                        <li>Real-time monitoring</li>
-                        <li>Auto-response capabilities</li>
-                        <li>Message search functionality</li>
-                    </ul>
+                    <div class="professional-badge">Premium</div>
+                    <div class="card-content">
+                        <div class="feature-icon">💬</div>
+                        <h3>Chat Management</h3>
+                        <p>Comprehensive chat monitoring and control</p>
+                        <ul class="feature-list">
+                            <li>View chat history</li>
+                            <li>Real-time monitoring</li>
+                            <li>Auto-response capabilities</li>
+                            <li>Message search functionality</li>
+                        </ul>
+                    </div>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon">📊</div>
-                    <h3>Analytics & Reporting</h3>
-                    <p>Detailed insights into your messaging</p>
-                    <ul class="feature-list">
-                        <li>Message count tracking</li>
-                        <li>Delivery status monitoring</li>
-                        <li>Time-based analytics</li>
-                        <li>Export capabilities</li>
-                    </ul>
+                    <div class="professional-badge">Business</div>
+                    <div class="card-content">
+                        <div class="feature-icon">📊</div>
+                        <h3>Analytics & Reporting</h3>
+                        <p>Detailed insights into your messaging</p>
+                        <ul class="feature-list">
+                            <li>Message count tracking</li>
+                            <li>Delivery status monitoring</li>
+                            <li>Time-based analytics</li>
+                            <li>Export capabilities</li>
+                        </ul>
+                    </div>
                 </div>
+            </div>
+            <div class="enterprise-ready">
+                <span>Enterprise-grade security</span>
+                <span>Advanced encryption standards</span>
+                <span>Compliant with data protection regulations</span>
             </div>
         </div>
     </section>
@@ -669,24 +1586,36 @@
             </div>
             <div class="steps-grid">
                 <div class="step-card">
-                    <div class="step-number">1</div>
-                    <h3>Quick QR Login</h3>
-                    <p>Simply scan the QR code with your WhatsApp - no complex setup needed</p>
+                    <div class="professional-badge">Step 1</div>
+                    <div class="card-content">
+                        <div class="step-number">1</div>
+                        <h3>Quick QR Login</h3>
+                        <p>Simply scan the QR code with your WhatsApp - no complex setup needed</p>
+                    </div>
                 </div>
                 <div class="step-card">
-                    <div class="step-number">2</div>
-                    <h3>Local Storage</h3>
-                    <p>All data stays on your device - we don't store anything on our servers</p>
+                    <div class="professional-badge">Step 2</div>
+                    <div class="card-content">
+                        <div class="step-number">2</div>
+                        <h3>Local Storage</h3>
+                        <p>All data stays on your device - we don't store anything on our servers</p>
+                    </div>
                 </div>
                 <div class="step-card">
-                    <div class="step-number">3</div>
-                    <h3>Start Using</h3>
-                    <p>Begin managing your WhatsApp messages with complete privacy</p>
+                    <div class="professional-badge">Step 3</div>
+                    <div class="card-content">
+                        <div class="step-number">3</div>
+                        <h3>Start Using</h3>
+                        <p>Begin managing your WhatsApp messages with complete privacy</p>
+                    </div>
                 </div>
                 <div class="step-card">
-                    <div class="step-number">4</div>
-                    <h3>Stay Secure</h3>
-                    <p>Your data remains safe and private on your device</p>
+                    <div class="professional-badge">Step 4</div>
+                    <div class="card-content">
+                        <div class="step-number">4</div>
+                        <h3>Stay Secure</h3>
+                        <p>Your data remains safe and private on your device</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -849,21 +1778,24 @@
             </div>
             <div class="download-grid" style="justify-content: center;">
                 <div class="download-card" style="max-width: 400px;">
-                    <div class="download-icon">🖥️</div>
-                    <h3>Windows Version</h3>
-                    <ul class="feature-list">
-                        <li>Windows 10 & 11 Compatible</li>
-                        <li>Easy Installation</li>
-                        <li>Automatic Updates</li>
-                        <li>Local Storage for Security</li>
-                        <li>Full Feature Support</li>
-                    </ul>
-                    <div style="text-align: center;">
-                        <a href="https://github.com/Pawan947/whatsapp-manager-pro/releases/download/v1.0.0/WhatsAppManagerPro.zip" class="download-button" id="windows-download" download>
-                            <span class="button-icon">⬇️</span>
-                            <span class="button-text">Download for Windows</span>
-                        </a>
-                        <p class="version-info">Version 1.0.0</p>
+                    <div class="professional-badge">Official Release</div>
+                    <div class="card-content">
+                        <div class="download-icon">🖥️</div>
+                        <h3>Windows Version</h3>
+                        <ul class="feature-list">
+                            <li>Windows 10 & 11 Compatible</li>
+                            <li>Easy Installation</li>
+                            <li>Automatic Updates</li>
+                            <li>Local Storage for Security</li>
+                            <li>Full Feature Support</li>
+                        </ul>
+                        <div style="text-align: center;">
+                            <a href="https://github.com/Pawan947/whatsapp-manager-pro/releases/download/v1.0.0/WhatsAppManagerPro.zip" class="download-button" id="windows-download" download>
+                                <span class="button-icon">⬇️</span>
+                                <span class="button-text">Download for Windows</span>
+                            </a>
+                            <p class="version-info">Version 1.0.0</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -901,6 +1833,62 @@
     </section>
 
     <script>
+        // Custom cursor effect
+        document.addEventListener('DOMContentLoaded', () => {
+            const cursor = document.getElementById('customCursor');
+            const cursorDot = document.getElementById('customCursorDot');
+            
+            document.addEventListener('mousemove', (e) => {
+                cursor.style.left = `${e.clientX}px`;
+                cursor.style.top = `${e.clientY}px`;
+                cursorDot.style.left = `${e.clientX}px`;
+                cursorDot.style.top = `${e.clientY}px`;
+            });
+            
+            document.addEventListener('mousedown', () => {
+                cursor.style.transform = 'translate(-50%, -50%) scale(0.8)';
+                cursorDot.style.transform = 'translate(-50%, -50%) scale(0.8)';
+            });
+            
+            document.addEventListener('mouseup', () => {
+                cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+                cursorDot.style.transform = 'translate(-50%, -50%) scale(1)';
+            });
+            
+            document.querySelectorAll('a, button, .feature-card, .step-card, .download-card, .tab').forEach(el => {
+                el.addEventListener('mouseenter', () => {
+                    cursor.style.transform = 'translate(-50%, -50%) scale(1.5)';
+                    cursor.style.backgroundColor = 'rgba(255, 51, 51, 0.1)';
+                    cursor.style.borderColor = 'rgba(255, 51, 51, 0.5)';
+                });
+                
+                el.addEventListener('mouseleave', () => {
+                    cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+                    cursor.style.backgroundColor = 'transparent';
+                    cursor.style.borderColor = 'rgba(255, 51, 51, 0.8)';
+                });
+            });
+        });
+        
+        // Mobile menu toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.querySelector('.nav-links');
+        
+        if (menuToggle) {
+            menuToggle.addEventListener('click', () => {
+                menuToggle.classList.toggle('active');
+                navLinks.classList.toggle('active');
+            });
+            
+            // Close menu when clicking a link
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    menuToggle.classList.remove('active');
+                    navLinks.classList.remove('active');
+                });
+            });
+        }
+
         // Add smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -911,21 +1899,37 @@
             });
         });
 
-        // Add animation on scroll
-        const observer = new IntersectionObserver((entries) => {
+        // Enhanced animations on scroll
+        const revealObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.reveal-animation').forEach((el) => {
+            revealObserver.observe(el);
+        });
+
+        // Add animation on scroll with staggered delay
+        const staggerObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
                 if (entry.isIntersecting) {
                     entry.target.style.opacity = 1;
                     entry.target.style.transform = 'translateY(0)';
+                    // Add staggered delay
+                    entry.target.style.transitionDelay = `${index * 0.1}s`;
                 }
             });
         });
 
-        document.querySelectorAll('.feature-card, .download-card, .step-card, .stat-item').forEach((el) => {
+        document.querySelectorAll('.feature-card, .download-card, .step-card, .stat-item').forEach((el, index) => {
             el.style.opacity = 0;
             el.style.transform = 'translateY(20px)';
-            el.style.transition = 'all 0.5s ease-out';
-            observer.observe(el);
+            el.style.transition = 'all 0.6s cubic-bezier(0.5, 0, 0, 1)';
+            el.setAttribute('data-index', index);
+            staggerObserver.observe(el);
         });
 
         // Tab functionality
@@ -943,6 +1947,283 @@
                 document.getElementById(tabId).classList.add('active');
             });
         });
+
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                navbar.classList.add('nav-scrolled');
+            } else {
+                navbar.classList.remove('nav-scrolled');
+            }
+        });
+
+        // Enhanced Parallax effect
+        window.addEventListener('scroll', () => {
+            const scrollY = window.scrollY;
+            const parallaxElements = document.querySelectorAll('.parallax-bg, .header-shape');
+            
+            parallaxElements.forEach(el => {
+                const speed = el.getAttribute('data-speed') || 0.5;
+                el.style.transform = `translateY(${scrollY * speed}px)`;
+            });
+            
+            // Parallax for section backgrounds
+            document.querySelectorAll('section').forEach(section => {
+                const rect = section.getBoundingClientRect();
+                if (rect.top < window.innerHeight && rect.bottom > 0) {
+                    const scrollProgress = (window.innerHeight - rect.top) / (window.innerHeight + rect.height);
+                    const bg = section.querySelector('.parallax-bg');
+                    if (bg) {
+                        bg.style.transform = `translateY(${scrollProgress * 50}px)`;
+                    }
+                }
+            });
+        });
+
+        // Advanced Dynamic background effect with particles
+        const dynamicBg = document.getElementById('dynamicBg');
+        if (dynamicBg) {
+            // Create advanced particles
+            const createAdvancedParticle = () => {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // Random size between 5 and 50 pixels
+                const size = Math.random() * 45 + 5;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                
+                // Position anywhere in the viewport
+                particle.style.top = `${Math.random() * 100}%`;
+                particle.style.left = `${Math.random() * 100}%`;
+                
+                // Random opacity and blend mode
+                particle.style.opacity = Math.random() * 0.3 + 0.1;
+                
+                // Random animation duration and delay
+                const duration = Math.random() * 40 + 20;
+                particle.style.animationDuration = `${duration}s`;
+                particle.style.animationDelay = `-${Math.random() * 40}s`;
+                
+                dynamicBg.appendChild(particle);
+                
+                // Remove after animation completes
+                setTimeout(() => {
+                    particle.remove();
+                }, duration * 1000);
+            };
+            
+            // Create initial set of particles
+            for (let i = 0; i < 15; i++) {
+                createAdvancedParticle();
+            }
+            
+            // Continuously add new particles
+            setInterval(createAdvancedParticle, 2000);
+        }
+
+        // Enhanced 3D tilt effect for cards
+        document.querySelectorAll('.feature-card, .step-card, .download-card').forEach(card => {
+            let isDragging = false;
+            let startX, startY;
+            let startRotateX = 0, startRotateY = 0;
+            let currentRotateX = 0, currentRotateY = 0;
+            const maxRotation = 15;
+            
+            // Initialize card with 3D style
+            const cardContent = card.querySelector('.card-content');
+            
+            // Handle mouse movement for tilt effect
+            card.addEventListener('mousemove', (e) => {
+                if (isDragging) return;
+                
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const xPercent = (x / rect.width - 0.5) * 20;
+                const yPercent = (y / rect.height - 0.5) * 20;
+                
+                // Add glare effect
+                const glarePos = `${x / rect.width * 100}% ${y / rect.height * 100}%`;
+                card.style.backgroundImage = `radial-gradient(circle at ${glarePos}, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 80%)`;
+                
+                // Apply tilt transformation
+                card.style.transform = `perspective(1000px) rotateX(${-yPercent}deg) rotateY(${xPercent}deg) scale3d(1.02, 1.02, 1.02)`;
+                card.style.boxShadow = `
+                    ${xPercent * 0.5}px ${yPercent * 0.5}px 30px rgba(255, 51, 51, 0.2), 
+                    0 10px 20px rgba(0, 0, 0, 0.2)
+                `;
+            });
+            
+            // User-controlled rotation with mouse drag
+            card.addEventListener('mousedown', (e) => {
+                isDragging = true;
+                card.style.cursor = 'grabbing';
+                startX = e.clientX;
+                startY = e.clientY;
+                
+                // Extract current rotation values
+                const transform = card.style.transform;
+                const rotateXMatch = transform.match(/rotateX\(([^)]+)\)/);
+                const rotateYMatch = transform.match(/rotateY\(([^)]+)\)/);
+                
+                startRotateX = rotateXMatch ? parseFloat(rotateXMatch[1]) : 0;
+                startRotateY = rotateYMatch ? parseFloat(rotateYMatch[1]) : 0;
+                currentRotateX = startRotateX;
+                currentRotateY = startRotateY;
+                
+                e.preventDefault();
+            });
+            
+            document.addEventListener('mousemove', (e) => {
+                if (!isDragging) return;
+                
+                const dx = e.clientX - startX;
+                const dy = e.clientY - startY;
+                
+                // Calculate new rotation
+                currentRotateY = startRotateY + (dx * 0.5);
+                currentRotateX = startRotateX - (dy * 0.5);
+                
+                // Limit rotation
+                currentRotateX = Math.max(-maxRotation, Math.min(maxRotation, currentRotateX));
+                
+                // Apply rotation
+                card.style.transform = `perspective(1000px) rotateX(${currentRotateX}deg) rotateY(${currentRotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+            });
+            
+            document.addEventListener('mouseup', () => {
+                if (isDragging) {
+                    isDragging = false;
+                    card.style.cursor = 'grab';
+                    
+                    // Smooth return animation
+                    card.style.transition = 'transform 0.8s cubic-bezier(0.23, 1, 0.32, 1)';
+                    setTimeout(() => {
+                        card.style.transition = 'transform 0.2s cubic-bezier(0.23, 1, 0.32, 1)';
+                    }, 800);
+                }
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                if (!isDragging) {
+                    card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)';
+                    card.style.boxShadow = 'var(--glass-shadow)';
+                    card.style.backgroundImage = 'none';
+                }
+            });
+            
+            // Add spring-back effect
+            card.addEventListener('mouseout', () => {
+                isDragging = false;
+                card.style.cursor = 'grab';
+                card.style.transition = 'transform 0.8s cubic-bezier(0.23, 1, 0.32, 1)';
+                card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)';
+                card.style.boxShadow = 'var(--glass-shadow)';
+                card.style.backgroundImage = 'none';
+                
+                setTimeout(() => {
+                    card.style.transition = 'transform 0.2s cubic-bezier(0.23, 1, 0.32, 1)';
+                }, 800);
+            });
+            
+            // Add touch support for mobile devices
+            card.addEventListener('touchstart', (e) => {
+                isDragging = true;
+                startX = e.touches[0].clientX;
+                startY = e.touches[0].clientY;
+                
+                const transform = card.style.transform;
+                const rotateXMatch = transform.match(/rotateX\(([^)]+)\)/);
+                const rotateYMatch = transform.match(/rotateY\(([^)]+)\)/);
+                
+                startRotateX = rotateXMatch ? parseFloat(rotateXMatch[1]) : 0;
+                startRotateY = rotateYMatch ? parseFloat(rotateYMatch[1]) : 0;
+                currentRotateX = startRotateX;
+                currentRotateY = startRotateY;
+                
+                e.preventDefault();
+            });
+            
+            document.addEventListener('touchmove', (e) => {
+                if (!isDragging) return;
+                
+                const dx = e.touches[0].clientX - startX;
+                const dy = e.touches[0].clientY - startY;
+                
+                currentRotateY = startRotateY + (dx * 0.5);
+                currentRotateX = startRotateX - (dy * 0.5);
+                
+                currentRotateX = Math.max(-maxRotation, Math.min(maxRotation, currentRotateX));
+                
+                card.style.transform = `perspective(1000px) rotateX(${currentRotateX}deg) rotateY(${currentRotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+            });
+            
+            document.addEventListener('touchend', () => {
+                isDragging = false;
+                card.style.transition = 'transform 0.8s cubic-bezier(0.23, 1, 0.32, 1)';
+                card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)';
+                
+                setTimeout(() => {
+                    card.style.transition = 'transform 0.2s cubic-bezier(0.23, 1, 0.32, 1)';
+                }, 800);
+            });
+        });
+        
+        // 3D Cube interaction
+        const cube = document.getElementById('cube');
+        if (cube) {
+            let xRotation = -15;
+            let yRotation = 0;
+            let isMouseDown = false;
+            let startX, startY;
+            
+            cube.addEventListener('mousedown', (e) => {
+                isMouseDown = true;
+                startX = e.clientX;
+                startY = e.clientY;
+                cube.style.animationPlayState = 'paused';
+                e.preventDefault();
+            });
+            
+            document.addEventListener('mousemove', (e) => {
+                if (!isMouseDown) return;
+                
+                const dx = e.clientX - startX;
+                const dy = e.clientY - startY;
+                
+                yRotation += dx * 0.5;
+                xRotation -= dy * 0.5;
+                
+                cube.style.transform = `rotateX(${xRotation}deg) rotateY(${yRotation}deg)`;
+                
+                startX = e.clientX;
+                startY = e.clientY;
+            });
+            
+            document.addEventListener('mouseup', () => {
+                isMouseDown = false;
+                cube.style.animationPlayState = 'running';
+            });
+            
+            // Auto rotate after interaction stops
+            let timeout;
+            cube.addEventListener('mousemove', () => {
+                clearTimeout(timeout);
+                timeout = setTimeout(() => {
+                    if (!isMouseDown) {
+                        cube.style.transition = 'transform 1s ease';
+                        cube.style.transform = 'rotateX(-15deg) rotateY(15deg)';
+                        setTimeout(() => {
+                            cube.style.transition = 'none';
+                            cube.style.animationPlayState = 'running';
+                        }, 1000);
+                    }
+                }, 2000);
+            });
+        }
     </script>
 </body>
 </html> 
