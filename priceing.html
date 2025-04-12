@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flexible WhatsApp Manager Pricing</title>
+    <style>
+        :root {
+            --primary-red: #ff3333;
+            --dark-red: #cc0000;
+            --black: #1a1a1a;
+            --light-gray: #f5f5f5;
+            --dark-gray: #333;
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            --neon-glow: 0 0 10px rgba(255, 51, 51, 0.5), 0 0 20px rgba(255, 51, 51, 0.3), 0 0 30px rgba(255, 51, 51, 0.1);
+        }
+
+        body {
+            background-color: var(--black);
+            color: var(--light-gray);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(255, 0, 0, 0.03) 0%, transparent 25%),
+                radial-gradient(circle at 80% 80%, rgba(255, 0, 0, 0.03) 0%, transparent 25%),
+                radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 0.8) 0%, var(--black) 100%);
+            background-attachment: fixed;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .price-calculator {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--glass-shadow);
+            border-radius: 15px;
+            padding: 2rem;
+            max-width: 800px;
+            margin: 2rem auto;
+        }
+
+        .days-slider {
+            width: 100%;
+            margin: 2rem 0;
+            -webkit-appearance: none;
+            height: 8px;
+            background: var(--dark-gray);
+            border-radius: 4px;
+        }
+
+        .days-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 24px;
+            height: 24px;
+            background: var(--primary-red);
+            border-radius: 50%;
+        }
+
+        .price-display {
+            text-align: center;
+            font-size: 2.5rem;
+            color: var(--light-gray);
+            margin: 1rem 0;
+        }
+
+        .per-day {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1.2rem;
+        }
+
+        .price-comparison {
+            color: #95A5A6;
+            text-decoration: line-through;
+        }
+
+        .tier-badge {
+            background: var(--primary-red);
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            font-size: 1.2rem;
+            background-color: var(--primary-red);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            margin: 1rem;
+            width: calc(100% - 2rem);
+            text-align: center;
+        }
+
+        .cta-button:hover {
+            background-color: var(--dark-red);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 51, 51, 0.4);
+        }
+
+        .plan-highlights {
+            margin-top: 2rem;
+        }
+
+        .highlight-item {
+            margin: 0.8rem 0;
+            color: var(--light-gray);
+            position: relative;
+            padding-left: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .highlight-item:hover {
+            transform: translateX(5px);
+            color: var(--primary-red);
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary-red);
+            text-shadow: 0 0 10px rgba(255, 51, 51, 0.3);
+            text-align: center;
+        }
+
+        p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            color: rgba(255, 255, 255, 0.7);
+            text-align: center;
+        }
+
+        .selected-days {
+            color: var(--light-gray);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        #dayCount {
+            color: var(--primary-red);
+            font-weight: bold;
+        }
+
+        #finalPrice {
+            color: var(--primary-red);
+            text-shadow: var(--neon-glow);
+            font-weight: bold;
+        }
+
+        .slider-container {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 51, 51, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="price-calculator">
+        <h2>Build Your Perfect Plan</h2>
+        <p>Pay only for what you need</p>
+
+        <div class="slider-container">
+            <input type="range" min="1" max="60" value="7" class="days-slider" id="daysSlider">
+            <div class="selected-days">Selected Days: <span id="dayCount">7</span></div>
+        </div>
+
+        <div class="price-display">
+            <span class="price-comparison">₹699</span>
+            <span id="finalPrice">₹199</span>
+            <div class="per-day" id="perDayCost">₹28.4/day</div>
+            <div class="tier-badge" id="savingsBadge">Save 71%</div>
+        </div>
+
+        <button class="cta-button">Start Now →</button>
+
+        <div class="plan-highlights">
+            <div class="highlight-item">✓ 24/7 Support</div>
+            <div class="highlight-item">✓ 7-Day Money Back</div>
+            <div class="highlight-item">✓ Used by 8,500+ Users</div>
+        </div>
+    </div>
+
+    <script>
+        const calculatePrice = (days) => {
+            // Tiered pricing model (psychologically optimized)
+            let price = 0;
+            let originalPrice = days * 50; // Artificial anchor price
+            
+            if(days <= 3) {
+                price = days * 49; // High daily rate for ultra-short
+            } 
+            else if(days <= 7) {
+                price = days * 39; 
+            }
+            else if(days <= 14) {
+                price = days * 29;
+            }
+            else if(days <= 30) {
+                price = days * 19;
+            }
+            else {
+                price = days * 14; // Best value for long-term
+            }
+
+            // Max price cap at 60 days
+            const cappedPrice = Math.min(price, 799);
+            
+            return {
+                finalPrice: Math.round(cappedPrice),
+                perDay: (cappedPrice/days).toFixed(1),
+                originalPrice: Math.round(originalPrice)
+            };
+        };
+
+        // Update display in real-time
+        const updatePrices = (days) => {
+            const {finalPrice, perDay, originalPrice} = calculatePrice(days);
+            
+            document.getElementById('dayCount').textContent = days;
+            document.getElementById('finalPrice').textContent = `₹${finalPrice}`;
+            document.getElementById('perDayCost').textContent = `₹${perDay}/day`;
+            document.getElementById('savingsBadge').textContent = 
+                `Save ${Math.round(100 - (finalPrice/originalPrice)*100)}%`;
+            
+            document.querySelector('.price-comparison').textContent = `₹${originalPrice}`;
+        };
+
+        // Initial calculation
+        updatePrices(7);
+
+        // Slider interaction
+        document.getElementById('daysSlider').addEventListener('input', (e) => {
+            updatePrices(parseInt(e.target.value));
+        });
+    </script>
+</body>
+</html>
